@@ -551,7 +551,7 @@ def cancercheck():
     elif(inventory[finditem("Cancer")][1] > 100-(modifier*18)):
         print("The cancer is very tiny sized right now. However, there is always the chance it gets larger.")
     else:
-    print("the cancer might not even exist right now it is so small, however cancer has a tendancy to grow fast. When it does, It will not be mercyfull")
+        print("the cancer might not even exist right now it is so small, however cancer has a tendancy to grow fast. When it does, It will not be mercyfull")
 def shopkeep():
     global shopfeel
     if(shopfeel*0.01<random.random()):
