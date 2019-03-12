@@ -13,7 +13,7 @@ Based on @BRH0208's "Game". Mod by @RonanFinley
  * Cutting
    * You can now cut your head and hands off. 
 * Code Fixes
-  * Fixed a lot of code, rogue semicolons, tabbing, etc.
+  * Fixed a a bit of code: rogue semicolons, tabbing, etc.
 
 Debugging
 ---------
