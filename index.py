@@ -243,12 +243,12 @@ def GoFish():
         defaultlootable()
 def tictac(ai):
     winner="I"
-    gameover=0;
-    start=0;
+    gameover=0
+    start=0
     while(start==0 or (int(ai)>=3 and gameover==0)):
-        array=["+","+","+","+","+","+","+","+","+"];
-        turn=1;
-        start=1;
+        array=["+","+","+","+","+","+","+","+","+"]
+        turn=1
+        start=1
         import random
         import math
         def Wincheck(le):
@@ -335,13 +335,13 @@ def tictac(ai):
                     array[move]="X"
                     turn = turn*-1
                 else:
-                    location=str(input());
+                    location=str(input())
                     while(location == "No" or location == "no" or len(location)!=2 or int(location[0])>3 or int(location[1])>3 or int(location[0])<1 or int(location[1])<1):
                         print("That is invalid")
                         print("Put in 2 integer coodinates between 1 and 3")
                         print("The first is the y, the 2nd is the x")
                         print("They are next to eachother, So the bottom center square would be 21")
-                        location=str(input());
+                        location=str(input())
                     if(array[(int(location[0])-1)*3+(int(location[1])-1)]=="+"):
                         array[(int(location[0])-1)*3+(int(location[1])-1)]="X"
                         turn = turn*-1
@@ -364,13 +364,13 @@ def tictac(ai):
                     array[move]="O"
                     turn = turn*-1
                 else:
-                    location=str(input());
+                    location=str(input())
                     while(location == "No" or location == "no" or len(location)!=2 or int(location[0])>3 or int(location[1])>3 or int(location[0])<1 or int(location[1])<1):
                         print("That is invalid")
                         print("Put in 2 integer coodinates between 1 and 3")
                         print("The first is the y, the 2nd is the x")
                         print("They are next to eachother, So the bottom center square would be 21")
-                        location=str(input());
+                        location=str(input())
                     if(array[(int(location[0])-1)*3+(int(location[1])-1)]=="+"):
                         array[(int(location[0])-1)*3+(int(location[1])-1)]="O"
                         turn = turn*-1
@@ -801,7 +801,7 @@ def passtime(hours):
             if(finditem("curse of curses")!=-1 and inventory[finditem("curse of curses")][1]>=1):
                 for i in range(inventory[finditem("curse of curses")][1]):
                     if(random.random()<0.001*modifier):
-                        curses=["curses","bloodloss","insanity","wounds","haunting","slowness","hunger","thirst"];
+                        curses=["curses","bloodloss","insanity","wounds","haunting","slowness","hunger","thirst"]
                         curse=round(random.random()*(len(curses)-1))
                         print("Thanks to your curse of curses, you are cursed with "+curses[curse])
                         addstuff("curse of "+curses[curse],1)
@@ -877,7 +877,7 @@ def passtime(hours):
                 if(0.005>random.random()):
                     wounds=wounds+1
                 if(0.001>random.random()):
-                    rad = 0;
+                    rad = 0
                     if(finditem("Radiation Suit") == -1 or inventory[finditem("Radiation Suit")][1] <= 0):
                         rad+=1
                     if(finditem("Makeshift Radiation Suit") == -1 or inventory[finditem("Makeshift Radiation Suit")][1] <= 0):
@@ -888,16 +888,16 @@ def passtime(hours):
                         print("Your geiger counter clicks vigerously, as you quickly leave an area")
                     addstuff("Radiation",rad)
                 if(0.002>random.random()):
-                    entercombat("@",0);
+                    entercombat("@",0)
                 if(0.005>random.random()):
                     global x
                     global y
-                    lost=False;
+                    lost=False
                     if(x>0 and x<width-1):
-                        lost = True;
+                        lost = True
                         x+=round(random.random()*2-1)
                     if(y>0 and y<height-1):
-                        lost = True;
+                        lost = True
                         y+=round(random.random()*2-1)
                     if(lost):
                         print("You get lost")
@@ -1158,29 +1158,37 @@ def masscraft(a,b):
     docraft(a,b,"Chain",1,"Iron Bar",1,"Flail",1,0.2)
     docraft(a,b,"String",1,"Flower",12,"Flower Headwear",1,0.2)
     docraft(a,b,"String",1,"String",1,"Rope",1,0.1)
+    
+    docraft(a,b,"Iron Bar",1,"Iron Bar",1,"Shurekin",10,0.5)
+
     deathcheck()
 def addwound(wounds):
-  saves=0
-  hits=0
-  for i in range(wounds):
-    if((finditem("Knight Armor")==-1 or inventory[finditem("Knight Armor")][1]<1) and (finditem("Chainmail")==-1 or inventory[finditem("Chainmail")][1]<1)):
-        if((finditem("Wooden Armor")==-1 or inventory[finditem("Wooden Armor")][1]<1) or (random.random()<0.05*modifier)):
-                hits+=1
+    saves=0
+    hits=0
+    for i in range(wounds):
+        if((finditem("Knight Armor")==-1 or inventory[finditem("Knight Armor")][1]<1) and (finditem("Chainmail")==-1 or inventory[finditem("Chainmail")][1]<1)):
+            if((finditem("Wooden Armor")==-1 or inventory[finditem("Wooden Armor")][1]<1) or (random.random()<0.05*modifier)):
+                    hits+=1
+            else:
+                saves+=1
+                if(random.random()>0.05*modifier):
+                    inventory[finditem("Wooden Armor")][1]=inventory[finditem("Wooden Armor")][1]-1
+                    print("Your Wooden Armor Was destroyed")
         else:
             saves+=1
-            if(random.random()>0.05*modifier):
-                inventory[finditem("Wooden Armor")][1]=inventory[finditem("Wooden Armor")][1]-1
-                print("Your Wooden Armor Was destroyed")
-    else:
-        saves+=1
-        if(finditem("Chaimail")!=-1 and inventory[finditem("Chainmail")][1]>=1):
+            if(finditem("Chaimail")!=-1 and inventory[finditem("Chainmail")][1]>=1):
                 if(random.random()<0.05*modifier):
                     inventory[finditem("Chainmail")][1]=inventory[finditem("Chainmail")][1]-1
                     print("Your Chaimail Was destroyed")
-        if(finditem("Knight Armor")!=-1 and inventory[finditem("Knight Armor")][1]>=1):
+            if(finditem("Knight Armor")!=-1 and inventory[finditem("Knight Armor")][1]>=1):
                 if(random.random()<0.001*modifier):
                     print("Your Knight Armor Was destroyed")
                     inventory[finditem("Knight Armor")][1]=inventory[finditem("Knight Armor")][1]-1
+    if(finditem("Ninja Effect")!=-1 and inventory[finditem("Ninja Effect")][1]>=1):
+        print("As a Ninja you are quick on your feet.")
+        tmphits = hits
+        hits=round(hits/inventory[finditem("Ninja Effect")][1])
+        print("You managed to dodge "+int_to_en(tmphits-hits)+" damage")
     if(finditem("curse of wounds")!=-1 and inventory[finditem("curse of wounds")][1]>=1):
         hits=hits*(inventory[finditem("curse of wounds")][1]+1)
     
@@ -1263,110 +1271,110 @@ def gameman(v):
                 print("Your soul looks nice, Now. Die")
                 print("Any last words?")
                 input()
-            endgame()
+                endgame()
         elif(game==1):
             if(v == 0):
                 print("Ah, Tails.I am a man of my word.")
             elif(v == 1):
                 print("Ah, I lost. I am a man of my word.")
-            lootable(1,"Death Amulet",0)
-            print("When you die, It will revive you")
+                lootable(1,"Death Amulet",0)
+                print("When you die, It will revive you")
         print("The Figure vanishes.")
         end=0
-    if(end==1):
-        if(v == 1):
-            print("Okay, The bet is that if I flip this here coin, and get heads, you win. If its tails, you lose")
-            print("So, Wanna make a bet?")
-        elif(v == 0):            
-            print("Eh, I don't care. Wanna play?")
-        if(variableify(input())[0]=="N"):
-            print("Okay, Imma be on my way")
-            if(v == 0):
-                print("Instead you play against yourself")
-                tictac(0)
-        else:
-            print("I am gonna take dat as a yes!")
-            print("How much coin do ya wanna bet?")
-            if(finditem("Coin")==-1):
-                print("You don't have any coins")
-            elif(inventory[finditem("Coin")][1]==0):
-                print("You don't have any coins")
-            elif(inventory[finditem("Coin")][1]==1):
-                print("You look around in your pockets, You have one coin")
+        if(end==1):
+            if(v == 1):
+                print("Okay, The bet is that if I flip this here coin, and get heads, you win. If its tails, you lose")
+                print("So, Wanna make a bet?")
+            elif(v == 0):            
+                print("Eh, I don't care. Wanna play?")
+            if(variableify(input())[0]=="N"):
+                print("Okay, Imma be on my way")
+                if(v == 0):
+                    print("Instead you play against yourself")
+                    tictac(0)
             else:
-                print("You look around in your pockets, You have "+int_to_en(inventory[finditem("Coin")][1])+" coins")    
-            betest = False
-            while(betest == False):
-                betamount="0"+input()
-                betest = True
-                for i in range(len(betamount)):
-                if((betamount[i] != "0" and betamount[i] != "1" and    betamount[i] != "2" and betamount[i] != "3" and betamount[i] != "4" and betamount[i] != "5" and  betamount[i] != "6" and betamount[i] != "7" and betamount[i] != "8" and betamount[i] != "9")):
-                    betest = False
-            betamount = int(betamount)
-            odds=1.01**(-1*betamount)
-            #print(odds)
-            if(random.random()>odds):
-                print("Do you actualy HAVE that much money?")
-                input()
-                print("Let me see...")
-                if(finditem("Coin")==-1 or inventory[finditem("Coin")][1]<betamount):
-                    print("You dont have the coin!")
-                    stabamount=1+int(random.random()*math.ceil(betamount/10))
-                    if(stabamount>15):
-                        stabamount=15
-                    addwound(stabamount)
-                    betamount=-1
+                print("I am gonna take dat as a yes!")
+                print("How much coin do ya wanna bet?")
+                if(finditem("Coin")==-1):
+                    print("You don't have any coins")
+                elif(inventory[finditem("Coin")][1]==0):
+                    print("You don't have any coins")
+                elif(inventory[finditem("Coin")][1]==1):
+                    print("You look around in your pockets, You have one coin")
                 else:
-                    print("Okay, Good. You have the money")
-            if(betamount==0):
-                if(v==1):
-                    print("Haha, Its only fun if you bet!")
-                elif(v==0):
-                    print("Okay, Lets play")
-                    tictac(1)
-                    print("Good game!")
-                print("The Stranger Leaves")
-            elif(betamount>0):
-                print("Allright! Lets do this!")
-                if(v == 1):
-                    game = round(random.random())
-                elif(v == 0):
-                    game = tictac(1)
-                if(game==0):
-                    print("Ha! I win!")
+                    print("You look around in your pockets, You have "+int_to_en(inventory[finditem("Coin")][1])+" coins")    
+                betest = False
+                while(betest == False):
+                    betamount="0"+input()
+                    betest = True
+                    for i in range(len(betamount)):
+                        if((betamount[i] != "0" and betamount[i] != "1" and    betamount[i] != "2" and betamount[i] != "3" and betamount[i] != "4" and betamount[i] != "5" and  betamount[i] != "6" and betamount[i] != "7" and betamount[i] != "8" and betamount[i] != "9")):
+                            betest = False
+                betamount = int(betamount)
+                odds=1.01**(-1*betamount)
+                #print(odds)
+                if(random.random()>odds):
+                    print("Do you actualy HAVE that much money?")
+                    input()
+                    print("Let me see...")
                     if(finditem("Coin")==-1 or inventory[finditem("Coin")][1]<betamount):
-                        print("Wait, You ain't got the coin!")
-                        print("You notice he is very unhappy")
-                        print("He attempts to stab you for not being able to pay")
+                        print("You dont have the coin!")
                         stabamount=1+int(random.random()*math.ceil(betamount/10))
                         if(stabamount>15):
                             stabamount=15
                         addwound(stabamount)
-                        print("He runs off into the distance")
+                        betamount=-1
                     else:
-                        print("It was a fun game, Now hand over the coin!")
-                        print("Do you give him the coin?(Y/N)")
-                        givecoin=input()
-                        if(variableify(givecoin)[0]=="N"):
-                            print("Wait, I ain't gettin paid?")
-                            print("You notice he is unhappy")
-                            print("He attempts to stab you")
+                        print("Okay, Good. You have the money")
+                if(betamount==0):
+                    if(v==1):
+                        print("Haha, Its only fun if you bet!")
+                    elif(v==0):
+                        print("Okay, Lets play")
+                        tictac(1)
+                        print("Good game!")
+                    print("The Stranger Leaves")
+                elif(betamount>0):
+                    print("Allright! Lets do this!")
+                    if(v == 1):
+                        game = round(random.random())
+                    elif(v == 0):
+                        game = tictac(1)
+                    if(game==0):
+                        print("Ha! I win!")
+                        if(finditem("Coin")==-1 or inventory[finditem("Coin")][1]<betamount):
+                            print("Wait, You ain't got the coin!")
+                            print("You notice he is very unhappy")
+                            print("He attempts to stab you for not being able to pay")
                             stabamount=1+int(random.random()*math.ceil(betamount/10))
-                            if(stabamount>5):
-                                stabamount=5
+                            if(stabamount>15):
+                                    stabamount=15
                             addwound(stabamount)
-                            
                             print("He runs off into the distance")
                         else:
-                            inventory[finditem("Coin")][1]-=betamount
-                elif(game==1):
-                    print("Darn, Oh well")
-                    addstuff("Coin",betamount)
-                    print("He leaves, "+int_to_en(betamount)+" coins poorer")
+                            print("It was a fun game, Now hand over the coin!")
+                            print("Do you give him the coin?(Y/N)")
+                            givecoin=input()
+                            if(variableify(givecoin)[0]=="N"):
+                                print("Wait, I ain't gettin paid?")
+                                print("You notice he is unhappy")
+                                print("He attempts to stab you")
+                                stabamount=1+int(random.random()*math.ceil(betamount/10))
+                                if(stabamount>5):
+                                    stabamount=5
+                                addwound(stabamount)
+                                
+                                print("He runs off into the distance")
+                            else:
+                                inventory[finditem("Coin")][1]-=betamount
+                    elif(game==1):
+                        print("Darn, Oh well")
+                        addstuff("Coin",betamount)
+                        print("He leaves, "+int_to_en(betamount)+" coins poorer")
+                    else:
+                        print("With a tie, He Leaves")
                 else:
-                    print("With a tie, He Leaves")
-            else:
-                print("I ain't gonna play.")
+                    print("I ain't gonna play.")
 def wierdman():
     print("You see a wierd man approach")
     print("       __________")
@@ -1401,6 +1409,7 @@ def chestlootable():
     lootable(0.1,"Makeshift Axe",0)
     lootable(0.05,"Makeshift Shield",0)
     lootable(0.01,"Iron Shield",0)
+    lootable(0.01,"Shurekin",0) #New!
     lootable(0.05,"Trap",0)
     lootable(0.05,"Syringe",0)
     lootable(0.01,"Iron Bar",0)
@@ -1724,7 +1733,7 @@ def entercombat(entity,surprise):
                     addwound(round(0.25+random.random()*(modifier/2)))
                 elif(game == 1):
                     print("You use the pincers to your advantage")
-                    hp=hp-3*round(5/modifier);
+                    hp=hp-3*round(5/modifier)
                 else:
                     print("You block the pincers")
                 
@@ -1754,7 +1763,7 @@ def entercombat(entity,surprise):
                     slash+=1
                 addwound(slash)
             if(abilities[abil]=="curse"):
-                curses=["blindness","curses","bloodloss","insanity","wounds","haunting","slowness","hunger","thirst"];
+                curses=["blindness","curses","bloodloss","insanity","wounds","haunting","slowness","hunger","thirst"]
                 curse=round(random.random()*(len(curses)-1))
                 print("it has cursed you with "+curses[curse])
                 addstuff("curse of "+curses[curse],1)
@@ -1883,7 +1892,7 @@ def entercombat(entity,surprise):
                     print("It breaks")
                     addstuff("Hands",2)
             elif(useitem=="CANCER"):
-              cancercheck();
+              cancercheck()
             elif(useitem=="CHAINGLOVES"):
                 hp=hp-2
                 if(random.random()>0.99):
@@ -1944,10 +1953,10 @@ def entercombat(entity,surprise):
                     inventory[finditem("Open Wound")][1]-=1
                     print("You clean wounds")
                 if(finditem("Venom")!=-1 and random.random()>0.1*modifier and inventory[finditem("Venom")][1]>=1):
-                    inventory[finditem("Venom")][1]-=Math.ceil(6/modifier)
+                    inventory[finditem("Venom")][1]-=math.ceil(6/modifier)
                     print("You clear out your venom")
                 if(finditem("Infection")!=-1 and random.random()>0.1*modifier and inventory[finditem("Infection")][1]>=1):
-                    inventory[finditem("Infection")][1]-=Math.ceil(10/modifier)
+                    inventory[finditem("Infection")][1]-=math.ceil(10/modifier)
                     print("You apply the herb disinfectantly")
                 if(inventory[finditem("Blood")][1]<=90):
                     lootable(0.5,"Blood",5)
@@ -1998,6 +2007,15 @@ def entercombat(entity,surprise):
                 if(random.random()>0.3):
                     inventory[finditem("Makeshift Flail")][1]=inventory[finditem("Makeshift Flail")][1]-1
                     print("It breaks")
+            elif(useitem=="SHUREKIN"):
+                damdone=round(3*random.random())
+                if(speed>1):
+                    speed=speed/1.3
+                print("You did "+int_to_en(damdone)+" damage!")
+                hp=hp-damdone
+                inventory[finditem("Shurekin")][1]=inventory[finditem("Shurekin")][1]-1
+                print("You used the Shurekin. You have Ninja Effect!")
+                addstuff("Ninja Effect", 3)
             elif(useitem=="FLAIL"):
                 damdone=round(10*random.random())
                 print("You did "+int_to_en(damdone)+" damage!")
@@ -2026,9 +2044,9 @@ def entercombat(entity,surprise):
             elif(useitem=="BANDAGE"):
                 print("You apply basic aid")
                 if(finditem("Open Wound")!=-1 and inventory[finditem("Open Wound")][1]>0):
-                    inventory[finditem("Open Wound")][1]-=1;
+                    inventory[finditem("Open Wound")][1]-=1
                     print("You patch a wound")
-                    inventory[finditem("Bandage")][1]-=1;
+                    inventory[finditem("Bandage")][1]-=1
             elif(useitem=="WOODENCLUB"):
                 hp=hp-2
                 speed=speed/1.1
@@ -2155,9 +2173,11 @@ def entercombat(entity,surprise):
             lootable(0.5,"Bone",(meat-1)*10)
             lootable(0.5,"Fur",(meat-1)*10)
             lootable(0.5,"Hide",(meat-1)*10)
-        return True;
+        inventory[finditem("Ninja Effect")][1] = 0
+        return True
     elif(leave == 0):
-        return False;
+        inventory[finditem("Ninja Effect")][1] = 0
+        return False
     passtime(1)
 def defaultlootable():
     if(random.random()<0.01/modifier):
@@ -2423,14 +2443,14 @@ while(alive==1):
     elif(a=="HUNT"):
         if(world[x][y]=="T"):
             print("You wait an hour for a creature to come by...")
-            passtime(1);
+            passtime(1)
             if(random.random()>0.05*modifier):
                 entercombat("@Nature",0)
             else:
                 print("nothing comes")
         elif(world[x][y]=="t"):
             print("You wait an hour for a creature to come by...")
-            passtime(1);
+            passtime(1)
             if(random.random()>0.10*modifier):
                 entercombat("@Nature",0)
             else:
@@ -2439,7 +2459,7 @@ while(alive==1):
             entercombat("@Fantacy",0)
         elif(world[x][y]==" "):
             print("You wait an hour for a creature to come by...")
-            passtime(1);
+            passtime(1)
             if(random.random()>0.15*modifier):
                 entercombat("@Nature",0)
             else:
@@ -2481,7 +2501,7 @@ while(alive==1):
             print("How many hours do you sit for?")
             print("Say 'nvm' to cancel")
             hourtowait=input()           
-        valid = 1;
+        valid = 1
         if(hourtowait!="nvm"):
             for i in range(len(hourtowait)):
                 if(hourtowait[i] != "1" and hourtowait[i] != "2" and hourtowait[i] != "3" and hourtowait[i] != "4" and hourtowait[i] != "5" and hourtowait[i] != "6" and hourtowait[i] != "7" and hourtowait[i] != "8" and hourtowait[i] != "9" and hourtowait[i] != "0"):
@@ -2504,6 +2524,35 @@ while(alive==1):
         Item1 = input("Item 1: ")
         Item2 = input("Item 2: ")
         masscraft(Item1,Item2)
+    elif(a=="CUT"):
+        
+        print("You prepare a cutting utensil. (Say nvm to cancel)")
+        print("List of things you can cut:")
+        print(" * Head")
+        if(inventory[finditem("hands")][1]>0):
+            print(" * Hand")
+        inmotion=1
+        while(inmotion==1):
+            use=input("I cut my ").upper()
+            if(use=="NVM"):
+                print("Probably a sensible choice.")
+                inmotion=0
+            elif(use=="HEAD"):
+                print("The last thing you see is the devil, laughing in front of your eyes, before everything goes black.")
+                inmotion=0
+                alive=0
+            elif(use=="HAND"):
+                if(inventory[finditem("hands")][1]>0):
+                    print("You see the devil flash in your vision for a second. You can't help but think he drove you to this.")
+                    print("You slice off your hand at the joint. It's painfull. You lose a lot of blood.")
+                    inventory[finditem("hands")][1]=inventory[finditem("hands")][1]-1
+                    inventory[finditem("blood")][1]=inventory[finditem("blood")][1]/3
+                    inmotion=0
+                else:
+                    print("Do you not remember? You chopped off your bloody hands!")
+                    inmotion=0
+            else:
+                print("You might have that body part, but you can't seem to locate it.")
     elif(a=="USE"):
         if(len(sections)>1):
             b=" ".join(sections[1:len(sections)])
@@ -2555,7 +2604,7 @@ while(alive==1):
                     if(odds<0.01):
                         chestlootable()
             elif(useitem=="CANCER"):
-                cancercheck();
+                cancercheck()
             elif(useitem=="MAKESHIFTAXE"):
                 if(world[x][y]=="t" or world[x][y]=="T"):
                     odds=random.random()
@@ -2582,7 +2631,7 @@ while(alive==1):
                         world[x][y]="t"
             elif(useitem=="EMPTYBOTTLE"):
                 if(world[x][y]=="~" or world[x][y]=="w"):
-                lootable(0.9,"Water",10)
+                    lootable(0.9,"Water",10)
             elif(useitem=="NOTE"):
                 print("You read the note")
                 print("<------------------->")
@@ -2758,7 +2807,7 @@ while(alive==1):
                     print("You require a fire pit to create sacrifices")
             elif(useitem=="PICKAXE"):
                 if(world[x][y]=="A"):
-                    lootable(0.9)
+                    lootable(0.9, "Stone", 12)
             elif(useitem=="HERB"):
                 addstuff("Herb",-1)
                 print("You apply herbal treatments...")
@@ -3255,8 +3304,10 @@ elif(totalhours*modifier > 200):
     print("You were word-record breakingly horrible!")
 elif(totalhours*modifier > 100):
     print("You were word-record breakingly horrible, at best!")
-else:
+elif(totalhours*modifier > 1):
     print("How did you even die that fast?")
+else:
+    print("I refuse to look at with you did with my game.")
 print("So the story ends: With you very very dead")
 special = 1
 while(special == 1):
